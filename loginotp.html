@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <!-- Bootstrap script -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <!-- Google Font CSS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@100&family=Poppins:wght@200&display=swap" rel="stylesheet">
+    <!-- CSS Connect -->
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Swiper CDN -->
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"
+    />
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+    
+    <title>Login via OTP</title>
+</head>
+<body>
+    <div class="wrapper d-flex align-items-center justify-content-center">
+        <button type="button" class="btn btn-green" data-bs-toggle="modal" data-bs-target="#loginotp">Login</button>
+
+        <div class="modal fade" id="loginotp" tabindex="-1" aria-labelledby="emodal1Label" aria-hidden="true" role="dialog">
+            <div class="modal-dialog-centered modal-dialog">
+                <div class="modal-content">
+                    <button type="button" data-bs-dismiss="modal" aria-label="Close" class="modal-close"><img src="images/circle-close.png" alt=""></button>
+                    <div class="modal-body">
+                        <div class="modal-heading">
+                            <h6>Login via OTP.</h6>
+                            <p>Seller Account.</p>
+                        </div>
+                        <div class="modal-content-block">
+                            <ul class="forms">
+                                <li><p><b>Enter your Phone Number:</b></p><input type="text" class="form-field" placeholder="Enter your 10 digit Phone Number" name="" id="phone-input"></li>
+                                <li class="text-center"><button type="submit" class="btn btn-green" id="otp-button">Proceed to verify OTP!</button></li>
+                                <script src="js/custom.js"></script>
+                            </ul>
+                            <!-- Hidden Enter OTP -->
+                            <div class="otp-container hidden">
+                                <ul class="forms">
+                                    <li><p><b>Enter Your OTP:</b></p><input type="text" class="form-field" placeholder="Enter the OTP received." name="" id="otp-input"></li>
+                                    <li class="text-center"><p>Did not receive an OTP? <a href="#" id="resend-otp">Resend OTP</a></p></li>
+                                    <li class="text-center"><button type="submit" class="btn btn-green" id="verify-otp-button">Verify OTP!</button></li>
+                                    <script src="js/custom.js"></script>
+                                </ul>
+                            </div>
+                        </div>
+                        <div>
+                            
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        const phoneInputElement = document.getElementById('phone-input');
+        const otpButtonElement = document.getElementById('otp-button');
+        const otpInputElement = document.getElementById('otp-input');
+        const verifyOtpButtonElement = document.getElementById('verify-otp-button');
+        const resendOtpElement = document.getElementById('resend-otp');
+
+        const API_BASE_URL = 'http://localhost:8000'; //Replace as needed
+
+        // Valid phone number
+        otpButtonElement.addEventListener('click', () => {
+            const phoneNumber = phoneInputElement.value;
+
+            if (isValidPhoneNumber(phoneNumber)) {
+                fetch({$:API_BASE_URL}/otp/generate, {
+                    method: 'POST',
+                    mode: 'cors',
+                    body: JSON.stringify({ phone : phoneNumber }),
+                    headers: { 'Content-Type': 'application/json' }
+                })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.success) {
+                        showOtpContainer();
+                    }
+                    else {
+                        console.error(data.error);
+                    }
+                })
+                .catch(err => console.error(err));
+            }
+            else {
+                console.error('Invalid Phone Number.');
+            }
+          
+        });
+            
+
+        // Enter OTP
+        verifyOtpButtonElement.addEventListener('click', () => {
+            const otp = otpInputElement.value;
+            fetch({$:API_BASE_URL}/otp/generate, {
+                method: 'POST',
+                mode: 'cors',
+                body: JSON.stringify({ phone: phoneNumber, otp }),
+                headers: { 'Content-Type': 'application/json' }
+            })
+              .then(res => res.json())
+                .then(data => {
+                    if (data.success) {
+                        if (data.user) {
+                            const token = generateJWT(data.user);
+                            localStorage.setItem('token', token);
+                        
+                        }
+                            else {
+                                createuser(phoneNumber).then(() => redirectToRegister()); // if not a registered user
+                        }
+                         {
+                            console.error(data.error(err => err.message));
+                            err.message = 'User not registered';
+                        }
+                    }        
+                })
+                .catch(err => console.error(err));
+
+            const user = { id:1, phone: phoneInputElement.value };
+            const token = generateJWT(user); //JWT token
+            localStorage.setItem('token', token); //Primarily can be used for local storage
+            redirectToDashboard(token); //redirect to index.html
+        });
+
+        resendOtpElement.addEventListener('click', () => {
+            const phoneNumber = phoneInputElement.value;
+            fetch({$:API_BASE_URL}/otp/generate, {
+                method: 'POST',
+                body: JSON.stringify({ phone: phoneNumber }),
+                headers: { 'Content-Type': 'application/json' }
+            })
+               .then(res => res.json())
+               .then(data => console.log(data.message))
+               .catch(err => console.error(err));
+        });
+
+        function isValidPhoneNumber(phoneNumber) {
+            return /^\d{10}$/.test(phoneNumber); //const phoneRegex = /^\d{10}$/; return phoneregex.test(phone);
+        }
+
+        function showOtpContainer() {
+            const phoneContainer = document.querySelector('.phone-number-container');
+            const otpContainer = document.querySelector('.otp-container');
+            phoneContainer.classList.add('hidden');
+            otpContainer.classList.remove('hidden');
+        }
+
+        function generateJWT(user) {
+            const payload = {sub: user.id, phone: user.phone};
+            const token = 'dummy.jwt.token'; //Replace the token as needed
+            return token;
+        }
+
+        function redirectToDashboard() {
+            window.location.href = 'index.html'; //Replace as needed
+        }
+
+        function createUser(phoneNumber) {
+            return fetch({$:API_BASE_URL}/register, { //function createUser (phoneNumber) { if (validatePhoneNumber(phoneNumber)) { const user = {phone} return user;} else { return "Invaild phone Number!"; } } });
+                method: 'POST',
+                body: JSON.stringify({ phone: phoneNumber }),
+                headers: { 'Content-Type': 'application/json' }
+            })
+        }
+
+        function generateOTP() {
+            var digit = '0123456789';
+            let OTP = '';
+            for (let i = 0; i < 6; i++) {
+                OTP += digits[Math.floor(Math.random() * 10)];
+            }
+            return OTP;
+        }
+        
+    </script>
+
+    <!-- JS -->
+    <script type="module" src="js/custom.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+    <!-- JQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
+    <!-- Swiper ES -->
+    <script type="module">
+        import Swiper from 'https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.esm.browser.min.js'
+    
+        const swiper = new Swiper()
+    </script>
+</body>
+</html>

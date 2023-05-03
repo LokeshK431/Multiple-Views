@@ -1,0 +1,50 @@
+/*--Import FONT CSS--*/
+@import url('font.css');
+/*--Import COLOR CSS--*/
+@import url('color.css');
+
+/*--Buttons--*/
+.btn{font-size:1.4rem; font-weight:var(--fw-semibold); padding:1rem 1.5rem; height:3.8rem; display:inline-flex; align-items:center; justify-content:center; border:0; border-radius:.6rem;}
+.btn.btn-green{background-color:hsl(var(--green)); color:hsl(0, 0%, 22%);}
+
+/*--Modal--*/
+.modal-backdrop.show{opacity:0.1;}
+.modal-content{border:0; border-radius:2rem; position:relative; box-shadow:0 0 1rem hsla(var(--black), 40%);}
+.modal-body{padding:3rem;}
+.modal .modal-close{position:absolute; left:50%; top:0; transform:translate(-50%, -50%);}
+.modal-close{width:4rem; height:4rem; border-radius:100%; background-color:hsl(var(--green)); display:flex; align-items:center; justify-content:center; z-index:99;}
+.modal-close img{max-width:60%;}
+
+/*--Labels--*/
+.label{font-size:1rem; border-radius:2rem; background-color:hsl(var(--green)); color:hsl(var(--white)); text-align:center; padding:.2rem .5rem;}
+
+/*--Select--*/
+select{border:0; border-radius:2rem; font-size:1.2rem; text-transform:uppercase; color:hsl(var(--white)); padding:0 2rem 0 .8rem; -webkit-appearance:none; -moz-appearance:none; background:url(../images/caret-down.png) calc(100% - .5rem) center no-repeat hsl(var(--green)); background-size:.8rem auto;}
+
+/* Dark mode */
+dark-color : {#111};
+light-color: {#eee};
+
+body.dark-mode{
+    background-color: dark-color;
+    color: light-color;
+    a {
+        color: dark-color;
+    }
+    button{
+        background-color: light-color;
+        color: dark-color;
+    }
+}
+
+body.light-mode{
+    background-color: light-color;
+    color: dark-color;
+    a {
+        color: dark-color;
+    }
+    button {
+        background-color: dark-color;
+        color: light-color;
+    }
+}

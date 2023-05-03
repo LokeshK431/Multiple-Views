@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Registration - Mera Farmhouse</title>
+        <!-- Bootstrap CDN -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+        <!-- Google Fonts Poppins -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@100&family=Poppins:wght@200&display=swap" rel="stylesheet">
+        <!-- CSS -->
+        <link rel="stylesheet" href="css/style.css">
+        <!-- Swiper CDN -->
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"
+        />
+
+        <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+    </head>
+    <body>
+        <!-- <body id="body" class="dark-mode">
+            <h2>Light/Dark Mode</h2>
+            <button type="button" name="dark_light" onclick="toggledarkLight()" title="Toggle dark/light mode"></button>
+            <p>Toggle to change!</p>
+        </body> -->
+        <div class="wrapper">
+            <main>
+                
+                <div class="register">
+                    <div class="register-header">
+                        <head>
+                        <a href="https://merafarmhouse.com/" class="logos"><img class="logos" src="images/logo.png" alt="logos"></a>
+                        <div class="text-container">
+                        <h1> Please Register!</h1><br></div>
+                    </div></head>
+                    <div class="register-content">
+                        <ul class="forms1">
+                            <li><p><b>Firm Name:</b></p><input type="text" class="form-field" placeholder="Bhandara Seeds Store"></li><br>
+                            <li><p><b>Licence No.:</b></p><input type="text" class="form-field" placeholder="XXXXX XXXXX"></li><br>
+                            <li><p><b>GST No.:</b></p><input type="text" class="form-field" placeholder="22AAAAA0000A1Z5"></li><br>
+                            <li><p><b>Associated with:</b></p><input type="text" class="form-field" placeholder="ABC Limited"></li><br>
+                            <li><p><b>Email ID:</p><input type="text" class="form-field" placeholder="example@email.com"></li><b></b></li><br>
+                            <li><p>Username:</p><input type="text" class="form-field" placeholder="merafarmhouse" name="" id=""></li><br>
+                            <li><p>Contact:</p><input type="text" class="form-field" placeholder="1234567890"></li><br>
+                            <li><p>Telephone:</p><input type="text" class="form-field" placeholder="0 0000 01234"></li><br>
+                            <li><p>Address:</p><input type="text" class="form-field" placeholder="123, Example Street"></li><br>
+                            <li><p>Pincode:</p><input type="text" class="form-field" placeholder="000 000"></li><br>
+                            <li><p>Website:</p><input type="text" class="form-field" placeholder="https://www.google.co.in/"></li><br>
+                            <li><p>Firm Category:</p>
+                            <form name="firm_form" id="" class="firm_form"><br>
+                                <div class="columns">
+                                <input type="checkbox" id="spare_parts" name="spare_parts" value="spare_parts">
+                                <label for="spare_parts">Spare Parts</label><br>
+                                <input type="checkbox" id="pesticides" name="pesticides" value="pesticides">
+                                <label for="pesticides">Pesticides</label><br>
+                                <input type="checkbox" id="seeds" name="seeds" value="seeds">
+                                <label for="seeds">Seeds</label><br>
+                                <input type="checkbox" id="feed" name="feed" value="feed">
+                                <label for="feed">Feed</label><br>
+                                <input type="checkbox" id="agricultural_equipments" name="agricultural_equipments" value="agricultural_equipments">
+                                <label for="agricultural_equipments">Agricultural Equipments</label><br>
+                                <input type="checkbox" id="others" name="others" value="others">
+                                <label for="others">Others</label><br>
+                                <!-- <option value="">Spare Parts</option>
+                                <option value="">Pesticides</option>
+                                <option value="">Seeds</option>
+                                <option value="">Feed</option>
+                                <option value="">Agricultural Equipments</option>
+                                <option value="">Next</option> -->
+                            </form><br>
+                            </li></div>
+                            
+                            <center><p>Already a member? <a href="login.html">Login!</a></p></center><br>
+                            <li class="text-center"><button type="submit" class="btn btn-green">Sign Up!</button></li>
+                        </ul>
+                    </div>
+                </div>
+            </main>
+        </div>
+        <script>
+        // Event Listener addition to register button
+
+        register.addEventListener('click', () => {
+            console.log('Register button clicked');
+        });
+        </script>
+        <!-- Bootstrap JS -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+        <!-- JQuery -->
+        <script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
+        <!-- Swiper ES -->
+        <script type="module">
+            import Swiper from 'https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.esm.browser.min.js'
+          
+            const swiper = new Swiper()
+        </script>
+        <!-- JS -->
+        <script src="js/custom.js"></script>
+    </body>
+</html>

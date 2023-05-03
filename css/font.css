@@ -1,0 +1,33 @@
+/*--RESET CSS--*/
+*, *::before, *::after{box-sizing: border-box;}
+html, body{font-size:72.5%; line-height:1.5; padding:0; margin:0;}
+ul{margin:0; padding:0;}
+li{font-size: medium; list-style:none;}
+img{max-width:100%; display:block;}
+p, label{margin:0; padding:0;}
+a, span{display:inline-block;}
+a, a:hover{text-decoration:none;}
+h1, h2, h3, h4, h5, h6{padding:0; margin:0; font-weight:normal;}
+figure{margin:0;}
+input:focus, button:focus, a:focus{outline:none;}
+textarea:focus{outline:none;}
+button{padding:0; border:0; margin:0; background:none;}
+
+/*--Variables--*/
+:root{
+	
+	/*Font Family*/
+	--font-family:'Poppins', sans-serif;
+	
+	/*Font Weight*/
+	--fw-light:300;
+	--fw-medium:500;
+	--fw-semibold:600;
+	--fw-bold:700;
+	--fw-extrabold:800;
+	--fw-black:900;
+	
+	/*Font Sizes*/	
+	--body-font-size:1.4rem;
+	
+}

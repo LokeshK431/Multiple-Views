@@ -1,0 +1,40 @@
+/*--Variables--*/
+:root{
+
+	/*White*/
+	--white-h:0;
+	--white-s:0%;
+	--white-l:100%;
+	--white:var(--white-h), var(--white-s), var(--white-l);
+	
+	/*Black*/
+	--black-h:0;
+	--black-s:0%;
+	--black-l:0%;
+	--black:var(--black-h), var(--black-s), var(--black-l);	
+	
+	/*Black*/
+	--yellow-h:37;
+	--yellow-s:93%;
+	--yellow-l:62%;
+	--yellow:var(--yellow-h), var(--yellow-s), var(--yellow-l);	
+	
+	/*Green*/
+	--green-h:76;
+	--green-s:55%;
+	--green-l:52%;
+	--green:var(--green-h), var(--green-s), var(--green-l);		
+		
+}
+
+/*--Colors--*/
+.black{color:hsl(var(--black));}
+.white{color:hsl(var(--white));}
+.yellow{color:hsl(var(--yellow));}
+.green{color:hsl(var(--green));}
+
+/*--Background Colors--*/
+.black-bg{background-color:hsl(var(--black));}
+.white-bg{background-color:hsl(var(--white));}
+.yellow-bg{background-color:hsl(var(--yellow));}
+.green-bg{background-color:hsl(var(--green));}
